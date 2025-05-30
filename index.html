@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Frase de emergencia + Mensajes</title>
   <style>
     body {
@@ -47,6 +47,8 @@
   <div id="estadoEnvio">📬</div>
 
   <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwtEYTtFs9iU42HsdssBeDYYW_LSNOiPS7ZOMDkLwdrGrtO5znvUCP4TAd1_1NCZ3jSmw/exec";
+
     const frases = [
       "te amo mucho muy muchisimo 💖",
       "te extraño 💗",
@@ -60,6 +62,7 @@
       "💜🤝💙",
       "hoy te amo mas que ayer y menos que mañana 💗"
     ];
+
     let contador = 0;
 
     function mostrarFrase() {
@@ -72,8 +75,6 @@
         contador = 0;
       }
     }
-
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwtEYTtFs9iU42HsdssBeDYYW_LSNOiPS7ZOMDkLwdrGrtO5znvUCP4TAd1_1NCZ3jSmw/exec";
 
     function enviarMensaje() {
       const mensaje = document.getElementById("mensajePersonalizado").value.trim();
@@ -88,7 +89,7 @@
 
       fetch(scriptURL, {
         method: 'POST',
-        mode: 'no-cors',  // clave para evitar CORS preflight
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
         },
