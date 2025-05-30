@@ -47,7 +47,7 @@
   <div id="estadoEnvio">📬</div>
 
   <script>
-    // URL de tu Web App de Google Apps Script
+    // URL de tu Web App de Google Apps Script (reemplazala por la tuya)
     const scriptURL = "https://script.google.com/macros/s/AKfycbwtEYTtFs9iU42HsdssBeDYYW_LSNOiPS7ZOMDkLwdrGrtO5znvUCP4TAd1_1NCZ3jSmw/exec";
 
     const frases = [
@@ -91,11 +91,11 @@
 
       fetch(scriptURL, {
         method: 'POST',
-        mode: 'cors',           // <-- agregado para CORS
-        body: JSON.stringify({ mensaje }),
+        mode: 'cors',             // Esto es clave para evitar problemas CORS
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({ mensaje })
       })
       .then(response => response.json())
       .then(data => {
