@@ -91,6 +91,7 @@
 
       fetch(scriptURL, {
         method: 'POST',
+        mode: 'cors',           // <-- agregado para CORS
         body: JSON.stringify({ mensaje }),
         headers: {
           'Content-Type': 'application/json'
