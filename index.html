@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Frase de emergencia + Mensajes</title>
   <style>
     body {
@@ -47,9 +47,6 @@
   <div id="estadoEnvio">📬</div>
 
   <script>
-    // URL de tu Web App de Google Apps Script (reemplazala por la tuya)
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwtEYTtFs9iU42HsdssBeDYYW_LSNOiPS7ZOMDkLwdrGrtO5znvUCP4TAd1_1NCZ3jSmw/exec";
-
     const frases = [
       "te amo mucho muy muchisimo 💖",
       "te extraño 💗",
@@ -63,7 +60,6 @@
       "💜🤝💙",
       "hoy te amo mas que ayer y menos que mañana 💗"
     ];
-
     let contador = 0;
 
     function mostrarFrase() {
@@ -77,7 +73,8 @@
       }
     }
 
-    // Función para enviar mensaje personalizado
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwtEYTtFs9iU42HsdssBeDYYW_LSNOiPS7ZOMDkLwdrGrtO5znvUCP4TAd1_1NCZ3jSmw/exec";
+
     function enviarMensaje() {
       const mensaje = document.getElementById("mensajePersonalizado").value.trim();
       const estadoEnvio = document.getElementById("estadoEnvio");
@@ -91,20 +88,15 @@
 
       fetch(scriptURL, {
         method: 'POST',
-        mode: 'cors',             // Esto es clave para evitar problemas CORS
+        mode: 'no-cors',  // clave para evitar CORS preflight
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
         },
-        body: JSON.stringify({ mensaje })
+        body: 'mensaje=' + encodeURIComponent(mensaje)
       })
-      .then(response => response.json())
-      .then(data => {
-        if (data.estado === "ok") {
-          estadoEnvio.textContent = "Mensaje enviado con éxito 💌";
-          document.getElementById("mensajePersonalizado").value = "";
-        } else {
-          estadoEnvio.textContent = "Error al enviar el mensaje 😥";
-        }
+      .then(() => {
+        estadoEnvio.textContent = "Mensaje enviado con éxito 💌";
+        document.getElementById("mensajePersonalizado").value = "";
       })
       .catch(() => {
         estadoEnvio.textContent = "No se pudo enviar el mensaje. Reintentá.";
